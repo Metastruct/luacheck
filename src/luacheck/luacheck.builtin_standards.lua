@@ -282,23 +282,6 @@ end
 
 builtin_standards._G = builtin_standards[detect_default_std()]
 
-builtin_standards.busted = {
-   read_globals = {
-      "describe", "insulate", "expose", "it", "pending", "before_each", "after_each",
-      "lazy_setup", "lazy_teardown", "strict_setup", "strict_teardown", "setup", "teardown",
-      "context", "spec", "test", "assert", "spy", "mock", "stub", "finally"
-   }
-}
-
-builtin_standards.love = require "luacheck.love_standard"
-
-builtin_standards.rockspec = {
-   globals = {
-      "rockspec_format", "package", "version", "description", "supported_platforms",
-      "dependencies", "external_dependencies", "source", "build"
-   }
-}
-
 builtin_standards.none = {}
 
 luacheck.builtin_standards = builtin_standards
