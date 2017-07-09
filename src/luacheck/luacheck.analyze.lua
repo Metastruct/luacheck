@@ -1,5 +1,5 @@
-local core_utils = require "luacheck.core_utils"
-local utils = require "luacheck.utils"
+local core_utils = require "luacheck.core_utils" or luacheck.core_utils
+local utils = require "luacheck.utils" or luacheck.utils
 
 local function register_value(values_per_var, var, value)
    if not values_per_var[var] then
@@ -417,4 +417,5 @@ local function analyze(chstate, line)
    check_unused_recursive_funcs(chstate, line)
 end
 
+luacheck.analyze = analyze
 return analyze

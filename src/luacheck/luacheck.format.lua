@@ -1,4 +1,4 @@
-local utils = require "luacheck.utils"
+local utils = require "luacheck.utils" or luacheck.utils
 
 local format = {}
 
@@ -399,4 +399,5 @@ function format.format(report, file_names, options)
    })
 end
 
+luacheck.format = format
 return format

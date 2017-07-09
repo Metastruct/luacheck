@@ -1,11 +1,11 @@
-local parser = require "luacheck.parser"
-local linearize = require "luacheck.linearize"
-local analyze = require "luacheck.analyze"
-local reachability = require "luacheck.reachability"
-local inline_options = require "luacheck.inline_options"
-local utils = require "luacheck.utils"
-local check_whitespace = require "luacheck.whitespace"
-local detect_globals = require "luacheck.detect_globals"
+local parser = require "luacheck.parser" or luacheck.parser
+local linearize = require "luacheck.linearize" or luacheck.linearize
+local analyze = require "luacheck.analyze" or luacheck.analyze
+local reachability = require "luacheck.reachability" or luacheck.reachability
+local inline_options = require "luacheck.inline_options" or luacheck.inline_options
+local utils = require "luacheck.utils" or luacheck.utils
+local check_whitespace = require "luacheck.whitespace" or luacheck.whitespace
+local detect_globals = require "luacheck.detect_globals" or luacheck.detect_globals
 
 local function is_secondary(value)
    return value.secondaries and value.secondaries.used
@@ -265,4 +265,5 @@ local function check(src)
    end
 end
 
+luacheck.check = check
 return check

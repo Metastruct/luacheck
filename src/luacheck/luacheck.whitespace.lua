@@ -33,4 +33,5 @@ local function check_whitespace(chstate, lines, line_endings)
    end
 end
 
+luacheck.whitespace = check_whitespace
 return check_whitespace

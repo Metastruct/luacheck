@@ -1,8 +1,8 @@
 local options = {}
 
-local builtin_standards = require "luacheck.builtin_standards"
-local standards = require "luacheck.standards"
-local utils = require "luacheck.utils"
+local builtin_standards = require "luacheck.builtin_standards" or luacheck.builtin_standards
+local standards = require "luacheck.standards" or luacheck.standards
+local utils = require "luacheck.utils" or luacheck.utils
 
 local boolean = utils.has_type("boolean")
 local array_of_strings = utils.array_of("string")
@@ -415,4 +415,5 @@ function options.normalize(opts_stack)
    return res
 end
 
+luacheck.options = options
 return options

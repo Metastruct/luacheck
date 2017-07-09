@@ -1,4 +1,4 @@
-local core_utils = require "luacheck.core_utils"
+local core_utils = require "luacheck.core_utils" or luacheck.core_utils
 
 local reachability
 
@@ -56,4 +56,5 @@ function reachability(chstate, line, nested)
    end
 end
 
+luacheck.reachability = reachability
 return reachability

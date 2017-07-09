@@ -87,4 +87,5 @@ function core_utils.sort_by_location(array)
    table.sort(array, event_comparator)
 end
 
+luacheck.core_utils = core_utils
 return core_utils

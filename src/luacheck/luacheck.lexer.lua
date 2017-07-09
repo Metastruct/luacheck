@@ -1,4 +1,4 @@
-local utils = require "luacheck.utils"
+local utils = require "luacheck.utils" or luacheck.utils
 
 -- Lexer should support syntax of Lua 5.1, Lua 5.2, Lua 5.3 and LuaJIT(64bit and complex cdata literals).
 local lexer = {}
@@ -717,4 +717,5 @@ function lexer.next_token(state)
    return token, token_value, token_line, token_column, token_offset, err_end_column or token_column
 end
 
+luacheck.lexer = lexer
 return lexer

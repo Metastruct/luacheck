@@ -1,12 +1,13 @@
-local check = require "luacheck.check"
-local filter = require "luacheck.filter"
-local options = require "luacheck.options"
-local format = require "luacheck.format"
-local utils = require "luacheck.utils"
-
 local luacheck = {
    _VERSION = "0.20.0"
 }
+_G.luacheck = luacheck
+
+local check = require "luacheck.check" or luacheck.check
+local filter = require "luacheck.filter" or luacheck.filter
+local options = require "luacheck.options" or luacheck.options
+local format = require "luacheck.format" or luacheck.format
+local utils = require "luacheck.utils" or luacheck.utils
 
 local function raw_validate_options(fname, opts)
    assert(opts == nil or type(opts) == "table",

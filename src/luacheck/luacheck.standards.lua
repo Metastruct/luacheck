@@ -218,4 +218,5 @@ function standards.finalize(final_std)
    infer_deep_read_only_statuses(final_std, true)
 end
 
+luacheck.standards = standards
 return standards

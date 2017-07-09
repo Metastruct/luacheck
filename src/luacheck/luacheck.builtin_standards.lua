@@ -1,4 +1,4 @@
-local standards = require "luacheck.standards"
+local standards = require "luacheck.standards" or luacheck.standards
 
 local builtin_standards = {}
 
@@ -301,4 +301,5 @@ builtin_standards.rockspec = {
 
 builtin_standards.none = {}
 
+luacheck.builtin_standards = builtin_standards
 return builtin_standards

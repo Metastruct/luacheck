@@ -1,7 +1,7 @@
-local inline_options = require "luacheck.inline_options"
-local options = require "luacheck.options"
-local core_utils = require "luacheck.core_utils"
-local utils = require "luacheck.utils"
+local inline_options = require "luacheck.inline_options" or luacheck.inline_options
+local options = require "luacheck.options" or luacheck.options
+local core_utils = require "luacheck.core_utils" or luacheck.core_utils
+local utils = require "luacheck.utils" or luacheck.utils
 
 local filter = {}
 
@@ -450,4 +450,5 @@ function filter.filter(report, opts)
    return filter_report(report)
 end
 
+luacheck.filter = filter
 return filter

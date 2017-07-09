@@ -1,4 +1,4 @@
-local utils = require "luacheck.utils"
+local utils = require "luacheck.utils" or luacheck.utils
 
 local function resolved_to_index(resolution)
    return resolution ~= "unknown" and resolution ~= "not_string" and resolution.tag ~= "String"
@@ -171,4 +171,5 @@ local function detect_globals(chstate, line)
    end
 end
 
+luacheck.detect_globals = detect_globals
 return detect_globals

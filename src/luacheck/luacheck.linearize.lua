@@ -1,5 +1,5 @@
-local parser = require "luacheck.parser"
-local utils = require "luacheck.utils"
+local parser = require "luacheck.parser" or luacheck.parser
+local utils = require "luacheck.utils" or luacheck.utils
 
 local pseudo_labels = utils.array_to_set({"do", "else", "break", "end", "return"})
 
@@ -704,4 +704,5 @@ local function linearize(chstate, ast)
    return line
 end
 
+luacheck.linearize = linearize
 return linearize

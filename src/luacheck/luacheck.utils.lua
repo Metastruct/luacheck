@@ -358,4 +358,5 @@ function utils.either(pred1, pred2)
    end
 end
 
+luacheck.utils = utils
 return utils

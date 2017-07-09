@@ -1,5 +1,5 @@
-local lexer = require "luacheck.lexer"
-local utils = require "luacheck.utils"
+local lexer = require "luacheck.lexer" or luacheck.lexer
+local utils = require "luacheck.utils" or luacheck.utils
 
 local parser = {}
 
@@ -754,4 +754,5 @@ function parser.parse(src)
    return ast, state.comments, state.code_lines, state.line_endings, state.hanging_semicolons
 end
 
+luacheck.parser = parser
 return parser
