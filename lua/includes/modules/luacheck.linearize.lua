@@ -1,7 +1,7 @@
 local parser = require "luacheck.parser" or luacheck.parser
 local utils = require "luacheck.utils" or luacheck.utils
 
-local pseudo_labels = utils.array_to_set({"do", "else", "break", "end", "return"})
+local pseudo_labels = utils.array_to_set({"do", "else", "break", "continue", "end", "return"})
 
 -- Who needs classes anyway.
 local function new_line(node, parent, value)
@@ -157,9 +157,9 @@ function LinState:leave_scope()
          label.used = true
       else
          if not prev_scope or prev_scope.line ~= self.lines.top then
-            if goto_.name == "break" then
+            if goto_.name == "break" or goto_.name == "continue" then
                parser.syntax_error(
-                  goto_.location, goto_.location.column + 4, "'break' is not inside a loop")
+                  goto_.location, goto_.location.column + 4, "'" .. goto_.name .. "' is not inside a loop")
             else
                parser.syntax_error(
                   goto_.location, goto_.location.column + 3, ("no visible label '%s'"):format(goto_.name))
@@ -304,6 +304,7 @@ function LinState:emit_stmt_While(node)
    self:emit_noop(node)
    self:enter_scope()
    self:register_label("do")
+   self:register_label("continue")
    self:emit_expr(node[1])
    self:emit_cond_goto("break", node[1])
    self:emit_block(node[2])
@@ -317,6 +318,7 @@ function LinState:emit_stmt_Repeat(node)
    self:emit_noop(node)
    self:enter_scope()
    self:register_label("do")
+   self:register_label("continue")
    self:enter_scope()
    self:emit_stmts(node[1])
    self:emit_expr(node[2])
@@ -337,6 +339,7 @@ function LinState:emit_stmt_Fornum(node)
 
    self:enter_scope()
    self:register_label("do")
+   self:register_label("continue")
    self:emit_goto("break", true)
    self:enter_scope()
    self:emit(new_local_item({node[1]}))
@@ -354,6 +357,7 @@ function LinState:emit_stmt_Forin(node)
    self:emit_exprs(node[2])
    self:enter_scope()
    self:register_label("do")
+   self:register_label("continue")
    self:emit_goto("break", true)
    self:enter_scope()
    self:emit(new_local_item(node[1]))
@@ -401,6 +405,10 @@ end
 
 function LinState:emit_stmt_Break(node)
    self:emit_goto("break", false, node.location)
+end
+
+function LinState:emit_stmt_Continue(node)
+  self:emit_goto("continue", false, node.location)
 end
 
 function LinState:emit_stmt_Return(node)

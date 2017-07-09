@@ -650,6 +650,10 @@ statements["break"] = function(_, loc)
    return init_ast_node({}, loc, "Break")
 end
 
+statements["continue"] = function(_, loc)
+   return init_ast_node({}, loc, "Continue")
+end
+
 statements["goto"] = function(state, loc)
    local name = check_name(state)
    skip_token(state)  -- Skip label name.
