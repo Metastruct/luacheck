@@ -13,7 +13,7 @@ function utils.read_file(file)
 
    if type(file) == "string" then
       local open_err
-      handler, open_err = io.open(file, "rb")
+      handler, open_err = file.Open(file, "rb", "GAME")
 
       if not handler then
          open_err = utils.unprefix(open_err, file .. ": ")
@@ -23,8 +23,8 @@ function utils.read_file(file)
       handler = file
    end
 
-   local res, read_err = handler:read("*a")
-   handler:close()
+   local res, read_err = handler:Read(handler:Size())
+   handler:Close()
 
    if not res then
       return nil, "couldn't read: " .. read_err

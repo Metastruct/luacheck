@@ -2,7 +2,7 @@ local utils = require "luacheck.utils" or luacheck.utils
 
 local format = {}
 
-local color_support = not utils.is_windows or os.getenv("ANSICON")
+local color_support = not utils.is_windows
 
 local function prefix_if_indirect(fmt)
    return function(w)

@@ -111,7 +111,7 @@ function luacheck.check_files(files, opts)
    for _, item in ipairs(files) do
       msg = ("bad argument #1 to 'luacheck.check_files' (array of paths or file handles expected, got %s)"):format(
          type(item))
-      assert(type(item) == "string" or io.type(item) == "file", msg
+      assert(type(item) == "string" or type(item) == "File", msg
       )
    end
 
