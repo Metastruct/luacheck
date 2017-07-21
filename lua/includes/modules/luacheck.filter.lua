@@ -208,11 +208,13 @@ local function get_field_string(warning)
    return table.concat(parts, ".")
 end
 
+local G = _G
 local function get_field_status(opts, warning, depth)
    local def = opts.std
    local defined = true
    local read_only = true
 
+   local t = G
    for i = 1, depth or #warning.indexing do
       local index_string = warning.indexing[i]
 
@@ -237,6 +239,7 @@ local function get_field_status(opts, warning, depth)
 
          break
       else
+         if t then t = t[index_string] end
          -- Indexing with a constant string.
          if def.fields and def.fields[index_string] then
             -- The field is defined, recurse into it.
@@ -248,10 +251,11 @@ local function get_field_status(opts, warning, depth)
          else
             -- The field is not defined, but it may be okay to index if `other_fields` is true.
             if not def.other_fields then
-               defined = false
+               if not t then
+                 defined = false
+                 break
+               end
             end
-
-            break
          end
       end
    end
