@@ -254,7 +254,6 @@ lua_defs.luajit = add_defs(make_min_def("luajit"), {
       unpack = empty
    }
 })
-lua_defs.ngx_lua = add_defs(lua_defs.luajit, require "luacheck.ngx_standard")
 lua_defs.max = add_defs(lua_defs.lua51c, lua_defs.lua52c, lua_defs.lua53c, lua_defs.luajit)
 
 for name, def in pairs(lua_defs) do
