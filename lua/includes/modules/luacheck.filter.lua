@@ -239,7 +239,7 @@ local function get_field_status(opts, warning, depth)
 
          break
       else
-         if t then t = t[index_string] end
+         if t then t = rawget(t, index_string) end
          -- Indexing with a constant string.
          if def.fields and def.fields[index_string] then
             -- The field is defined, recurse into it.
